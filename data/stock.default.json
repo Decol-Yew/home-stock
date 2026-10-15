@@ -13,7 +13,8 @@
     { "name": "Nightshade",    "jp": "ナイトシェード",    "category": "reagent", "count": 60,  "min": 100, "note": "" },
     { "name": "Spider's Silk", "jp": "蜘蛛の糸",          "category": "reagent", "count": 500, "min": 100, "note": "" },
     { "name": "Sulfurous Ash", "jp": "硫黄灰",            "category": "reagent", "count": 110, "min": 100, "note": "" },
-    { "name": "Arrow",         "jp": "矢",                "category": "other",   "count": 400, "min": 200, "note": "" },
+    { "name": "Arrow",         "jp": "赤矢",              "category": "other",   "count": 400, "min": 200, "note": "弓用" },
+    { "name": "Bolt",          "jp": "青矢",              "category": "other",   "count": 400, "min": 200, "note": "クロスボウ用" },
     { "name": "Empty Bottle",  "jp": "空き瓶",            "category": "other",   "count": 40,  "min": 50,  "note": "ポーション用" },
     { "name": "Blank Scroll",  "jp": "白紙の巻物",        "category": "other",   "count": 90,  "min": 50,  "note": "写本用" }
   ]
