@@ -82,6 +82,10 @@ h2.cat{font-family:var(--serif-en);font-weight:400;color:var(--gold);
 .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--cat,transparent)}
 .card.reagent{--cat:var(--c-reagent)} .card.other{--cat:var(--c-other)}
 .card.low{border-color:var(--low);box-shadow:0 0 0 1px rgba(215,107,127,.5) inset}
+.card .head{display:flex;gap:9px;align-items:flex-start}
+.card .ic{flex:0 0 auto;width:30px;height:30px;color:var(--icon-tint,var(--cat));opacity:.95}
+.card .ic svg{width:100%;height:100%;display:block}
+.card .head .txt{min-width:0}
 .card .name{font-family:var(--serif-en);font-size:.98rem;color:var(--text)}
 .card .jp{font-size:.74rem;color:var(--text-dim);margin-top:1px}
 .card .note{font-size:.72rem;color:var(--text-faint);font-style:italic;margin-top:2px;min-height:0}
@@ -191,6 +195,10 @@ a{color:var(--gold)}
       <label for="f-jp">和名（任意）</label>
       <input type="text" id="f-jp" placeholder="黒真珠">
     </div>
+    <div class="field">
+      <label for="f-icon">アイコン（キー・任意）</label>
+      <input type="text" id="f-icon" placeholder="pearl / moss / garlic / ginseng / mandrake / nightshade / silk / ash / arrow / bolt / bottle / scroll">
+    </div>
     <div class="two">
       <div class="field">
         <label for="f-cat">分類</label>
@@ -225,7 +233,7 @@ a{color:var(--gold)}
 
 <div class="toast" id="toast"></div>
 
-<script id="default-data" type="application/json">{"meta":{"title":"home-stock","note":"最後に確認した自宅在庫のスナップショット","checked":"2026-10-15"},"items":[{"name":"Black Pearl","jp":"黒真珠","category":"reagent","count":120,"min":100,"note":""},{"name":"Blood Moss","jp":"血苔","category":"reagent","count":300,"min":100,"note":""},{"name":"Garlic","jp":"にんにく","category":"reagent","count":450,"min":100,"note":""},{"name":"Ginseng","jp":"朝鮮人参","category":"reagent","count":200,"min":100,"note":""},{"name":"Mandrake Root","jp":"マンドレイクの根","category":"reagent","count":80,"min":100,"note":""},{"name":"Nightshade","jp":"ナイトシェード","category":"reagent","count":60,"min":100,"note":""},{"name":"Spider's Silk","jp":"蜘蛛の糸","category":"reagent","count":500,"min":100,"note":""},{"name":"Sulfurous Ash","jp":"硫黄灰","category":"reagent","count":110,"min":100,"note":""},{"name":"Arrow","jp":"赤矢","category":"other","count":400,"min":200,"note":"弓用"},{"name":"Bolt","jp":"青矢","category":"other","count":400,"min":200,"note":"クロスボウ用"},{"name":"Empty Bottle","jp":"空き瓶","category":"other","count":40,"min":50,"note":"ポーション用"},{"name":"Blank Scroll","jp":"白紙の巻物","category":"other","count":90,"min":50,"note":"写本用"}]}</script>
+<script id="default-data" type="application/json">{"meta":{"title":"home-stock","note":"最後に確認した自宅在庫のスナップショット","checked":"2026-10-15"},"items":[{"name":"Black Pearl","jp":"黒真珠","category":"reagent","icon":"pearl","count":120,"min":100,"note":""},{"name":"Blood Moss","jp":"血苔","category":"reagent","icon":"moss","count":300,"min":100,"note":""},{"name":"Garlic","jp":"にんにく","category":"reagent","icon":"garlic","count":450,"min":100,"note":""},{"name":"Ginseng","jp":"朝鮮人参","category":"reagent","icon":"ginseng","count":200,"min":100,"note":""},{"name":"Mandrake Root","jp":"マンドレイクの根","category":"reagent","icon":"mandrake","count":80,"min":100,"note":""},{"name":"Nightshade","jp":"ナイトシェード","category":"reagent","icon":"nightshade","count":60,"min":100,"note":""},{"name":"Spider's Silk","jp":"蜘蛛の糸","category":"reagent","icon":"silk","count":500,"min":100,"note":""},{"name":"Sulfurous Ash","jp":"硫黄灰","category":"reagent","icon":"ash","count":110,"min":100,"note":""},{"name":"Arrow","jp":"赤矢","category":"other","icon":"arrow","tint":"#d7715f","count":400,"min":200,"note":"弓用"},{"name":"Bolt","jp":"青矢","category":"other","icon":"bolt","tint":"#6ea8ff","count":400,"min":200,"note":"クロスボウ用"},{"name":"Empty Bottle","jp":"空き瓶","category":"other","icon":"bottle","count":40,"min":50,"note":"ポーション用"},{"name":"Blank Scroll","jp":"白紙の巻物","category":"other","icon":"scroll","count":90,"min":50,"note":"写本用"}]}</script>
 <script>
 "use strict";
 const EMBEDDED_DEFAULT = JSON.parse(document.getElementById('default-data').textContent);
@@ -234,6 +242,28 @@ const DEFAULT_URL = 'data/stock.default.json'; // original seed (never edited)
 const DRAFT_KEY = 'home-stock:draft';         // per-device uncommitted edits
 const CAT_LABEL = {reagent:'秘薬', other:'その他'};
 const CAT_ORDER = ['reagent','other'];
+
+/* ---- original (non-game) icon set: abstract silhouettes drawn for this tool ---- */
+const ICONS = {
+  pearl:     '<circle cx="12" cy="12" r="7"/><path d="M8.5 9.5a4 4 0 0 1 2.5-1.7"/>',
+  moss:      '<circle cx="8.5" cy="13" r="3"/><circle cx="14" cy="11" r="3.3"/><circle cx="16.8" cy="15" r="2.4"/><path d="M4 18.5h16"/>',
+  garlic:    '<path d="M12 4c1.6 2 4 4 4 8a4 4 0 0 1-8 0c0-4 2.4-6 4-8z"/><path d="M12 6v12.6M9.2 9.6c0 3 .4 6 2.8 8.6M14.8 9.6c0 3-.4 6-2.8 8.6"/>',
+  ginseng:   '<path d="M12 3.5c-1.6-1-3-.2-3 .8 1 1 3 .3 3-.8zM12 3.5c1.6-1 3-.2 3 .8-1 1-3 .3-3-.8z"/><path d="M12 4.3v5"/><path d="M12 9.3c-2 1-3.6 3-4.4 7M12 9.3c2 1 3.6 3 4.4 7M12 9.3c.2 3 0 5.4-.8 8.4"/>',
+  mandrake:  '<circle cx="12" cy="6.5" r="2.2"/><path d="M12 8.7v4.6M12 10.4l-3 2M12 10.4l3 2M12 13.3l-2.2 5M12 13.3l2.2 5"/>',
+  nightshade:'<path d="M5 11.2c0-2.4 3.1-4 7-4s7 1.6 7 4z"/><path d="M5 11.2h14"/><path d="M10 11.2v4a2 2 0 0 0 4 0v-4"/><circle cx="9.2" cy="9.6" r=".7" fill="currentColor" stroke="none"/><circle cx="13.6" cy="9.1" r=".7" fill="currentColor" stroke="none"/>',
+  silk:      '<path d="M12 3v18M4.3 7.5l15.4 9M19.7 7.5l-15.4 9"/><path d="M12 7.5l4.4 2.6-1.3 5H8.9l-1.3-5z"/><path d="M12 10.8l2.2 1.3-.7 2.5h-3l-.7-2.5z"/>',
+  ash:       '<path d="M12 3.6l2.6 7.2L12 20.4 9.4 10.8z"/><path d="M6.2 8.6l1.6 4.2L6 20M17.8 8.6l-1.6 4.2L18 20"/>',
+  arrow:     '<path d="M5 19L19 5"/><path d="M12.5 5H19v6.5"/>',
+  bolt:      '<path d="M12 20.5V9"/><path d="M8 11.5l4-7 4 7z"/><path d="M9.5 20.5L12 18l2.5 2.5"/>',
+  bottle:    '<path d="M10 3.5h4"/><path d="M11 3.5v3.3c0 .5-.2 1-.5 1.4L8 11a3.2 3.2 0 0 0-.8 2.1V18a2.8 2.8 0 0 0 2.8 2.8h4A2.8 2.8 0 0 0 16.8 18v-4.9A3.2 3.2 0 0 0 16 11l-2.5-2.8c-.3-.4-.5-.9-.5-1.4V3.5"/>',
+  scroll:    '<path d="M8 4.5h9a1.8 1.8 0 0 1 1.8 1.8v11"/><path d="M8 4.5A1.8 1.8 0 0 0 6.2 6.3v9.4"/><path d="M8 4.5a1.8 1.8 0 0 1 1.8 1.8v11A1.8 1.8 0 0 0 11.6 19H8"/><path d="M6.2 15.7A1.8 1.8 0 0 0 8 17.5"/><path d="M11.6 19h5.6a1.8 1.8 0 0 0 1.8-1.8"/>',
+  _default:  '<rect x="6" y="6" width="12" height="12" rx="2"/>'
+};
+function iconSvg(key){
+  const inner = ICONS[key] || ICONS._default;
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
+    + 'stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
+}
 
 let state = deepClone(EMBEDDED_DEFAULT);
 let repoData = null;
@@ -252,7 +282,7 @@ function normalize(d){
     it.count = Math.max(0, parseInt(it.count,10) || 0);
     it.min   = Math.max(0, parseInt(it.min,10)   || 0);
     it.category = CAT_LABEL[it.category] ? it.category : 'other';
-    it.jp = it.jp || ''; it.note = it.note || '';
+    it.jp = it.jp || ''; it.note = it.note || ''; it.icon = it.icon || '';
   });
   return d;
 }
@@ -376,11 +406,17 @@ function buildCard(it,i){
   const low = it.count < it.min;
   const card=document.createElement('div');
   card.className='card '+(CAT_LABEL[it.category]?it.category:'other')+(low?' low':'');
+  const tintStyle = it.tint ? ' style="--icon-tint:'+escapeHtml(it.tint)+'"' : '';
   card.innerHTML=
     '<button class="edit" data-edit="'+i+'">編集</button>'+
-    '<div class="name">'+escapeHtml(it.name)+'</div>'+
-    (it.jp?'<div class="jp">'+escapeHtml(it.jp)+'</div>':'')+
-    (it.note?'<div class="note">'+escapeHtml(it.note)+'</div>':'')+
+    '<div class="head">'+
+      '<span class="ic"'+tintStyle+'>'+iconSvg(it.icon)+'</span>'+
+      '<div class="txt">'+
+        '<div class="name">'+escapeHtml(it.name)+'</div>'+
+        (it.jp?'<div class="jp">'+escapeHtml(it.jp)+'</div>':'')+
+        (it.note?'<div class="note">'+escapeHtml(it.note)+'</div>':'')+
+      '</div>'+
+    '</div>'+
     '<div class="row">'+
       '<button class="step big" data-d="'+i+'" data-v="-10">−10</button>'+
       '<button class="step" data-d="'+i+'" data-v="-1">−1</button>'+
@@ -405,10 +441,11 @@ function buildCard(it,i){
 /* ---- editor ---- */
 function openEditor(i){
   editing = (i===undefined||i===null) ? null : {index:i};
-  const it = editing ? state.items[editing.index] : {name:'',jp:'',category:filterCat||'reagent',count:0,min:0,note:''};
+  const it = editing ? state.items[editing.index] : {name:'',jp:'',category:filterCat||'reagent',icon:'',count:0,min:0,note:''};
   document.getElementById('modal-title').textContent = editing?'品目の編集':'品目の追加';
   document.getElementById('f-name').value = it.name||'';
   document.getElementById('f-jp').value = it.jp||'';
+  document.getElementById('f-icon').value = it.icon||'';
   document.getElementById('f-cat').value = CAT_LABEL[it.category]?it.category:'other';
   document.getElementById('f-min').value = it.min;
   document.getElementById('f-count').value = it.count;
@@ -421,14 +458,15 @@ function closeEditor(){ document.getElementById('modal-bg').classList.remove('sh
 function saveEditor(){
   const name=document.getElementById('f-name').value.trim();
   if(!name){ toast('名前を入力してください'); return; }
-  const obj={
-    name,
-    jp:document.getElementById('f-jp').value.trim(),
-    category:document.getElementById('f-cat').value,
-    min:Math.max(0, parseInt(document.getElementById('f-min').value,10)||0),
-    count:Math.max(0, parseInt(document.getElementById('f-count').value,10)||0),
-    note:document.getElementById('f-note').value.trim()
-  };
+  // start from the existing object when editing so extra fields (e.g. tint) survive
+  const obj = editing ? {...state.items[editing.index]} : {};
+  obj.name = name;
+  obj.jp = document.getElementById('f-jp').value.trim();
+  obj.icon = document.getElementById('f-icon').value.trim();
+  obj.category = document.getElementById('f-cat').value;
+  obj.min = Math.max(0, parseInt(document.getElementById('f-min').value,10)||0);
+  obj.count = Math.max(0, parseInt(document.getElementById('f-count').value,10)||0);
+  obj.note = document.getElementById('f-note').value.trim();
   if(editing){ state.items[editing.index]=obj; }
   else{ state.items.push(obj); }
   touchChecked(); saveDraft(); closeEditor(); renderAll(); toast('保存しました(この端末の下書き)');
