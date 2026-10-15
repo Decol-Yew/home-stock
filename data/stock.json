@@ -5,17 +5,115 @@
     "checked": "2026-10-15"
   },
   "items": [
-    { "name": "Black Pearl",   "jp": "黒真珠",            "category": "reagent", "icon": "pearl",     "count": 120, "min": 100, "note": "" },
-    { "name": "Blood Moss",    "jp": "血苔",              "category": "reagent", "icon": "moss",      "count": 300, "min": 100, "note": "" },
-    { "name": "Garlic",        "jp": "にんにく",          "category": "reagent", "icon": "garlic",    "count": 450, "min": 100, "note": "" },
-    { "name": "Ginseng",       "jp": "朝鮮人参",          "category": "reagent", "icon": "ginseng",   "count": 200, "min": 100, "note": "" },
-    { "name": "Mandrake Root", "jp": "マンドレイクの根",  "category": "reagent", "icon": "mandrake",  "count": 80,  "min": 100, "note": "" },
-    { "name": "Nightshade",    "jp": "ナイトシェード",    "category": "reagent", "icon": "nightshade","count": 60,  "min": 100, "note": "" },
-    { "name": "Spider's Silk", "jp": "蜘蛛の糸",          "category": "reagent", "icon": "silk",      "count": 500, "min": 100, "note": "" },
-    { "name": "Sulfurous Ash", "jp": "硫黄灰",            "category": "reagent", "icon": "ash",       "count": 110, "min": 100, "note": "" },
-    { "name": "Arrow",         "jp": "赤矢",              "category": "other",   "icon": "arrow", "tint": "#d7715f", "count": 400, "min": 200, "note": "弓用" },
-    { "name": "Bolt",          "jp": "青矢",              "category": "other",   "icon": "bolt",  "tint": "#6ea8ff", "count": 400, "min": 200, "note": "クロスボウ用" },
-    { "name": "Empty Bottle",  "jp": "空き瓶",            "category": "other",   "icon": "bottle",    "count": 40,  "min": 50,  "note": "ポーション用" },
-    { "name": "Blank Scroll",  "jp": "白紙の巻物",        "category": "other",   "icon": "scroll",    "count": 90,  "min": 50,  "note": "写本用" }
+    {
+      "name": "Black Pearl",
+      "jp": "黒真珠",
+      "category": "reagent",
+      "icon": "pearl",
+      "count": 998,
+      "min": 1500,
+      "note": ""
+    },
+    {
+      "name": "Blood Moss",
+      "jp": "血苔",
+      "category": "reagent",
+      "icon": "moss",
+      "count": 1284,
+      "min": 1500,
+      "note": ""
+    },
+    {
+      "name": "Garlic",
+      "jp": "にんにく",
+      "category": "reagent",
+      "icon": "garlic",
+      "count": 1475,
+      "min": 1250,
+      "note": ""
+    },
+    {
+      "name": "Ginseng",
+      "jp": "朝鮮人参",
+      "category": "reagent",
+      "icon": "ginseng",
+      "count": 1112,
+      "min": 1250,
+      "note": ""
+    },
+    {
+      "name": "Mandrake Root",
+      "jp": "マンドレイクの根",
+      "category": "reagent",
+      "icon": "mandrake",
+      "count": 1182,
+      "min": 1500,
+      "note": ""
+    },
+    {
+      "name": "Nightshade",
+      "jp": "ナイトシェード",
+      "category": "reagent",
+      "icon": "nightshade",
+      "count": 1410,
+      "min": 1000,
+      "note": ""
+    },
+    {
+      "name": "Spider's Silk",
+      "jp": "蜘蛛の糸",
+      "category": "reagent",
+      "icon": "silk",
+      "count": 1372,
+      "min": 1000,
+      "note": ""
+    },
+    {
+      "name": "Sulfurous Ash",
+      "jp": "硫黄灰",
+      "category": "reagent",
+      "icon": "ash",
+      "count": 1383,
+      "min": 1500,
+      "note": ""
+    },
+    {
+      "name": "Arrow",
+      "jp": "赤矢",
+      "category": "other",
+      "icon": "arrow",
+      "tint": "#d7715f",
+      "count": 288,
+      "min": 1000,
+      "note": "弓用"
+    },
+    {
+      "name": "Bolt",
+      "jp": "青矢",
+      "category": "other",
+      "icon": "bolt",
+      "tint": "#6ea8ff",
+      "count": 400,
+      "min": 200,
+      "note": "クロスボウ用"
+    },
+    {
+      "name": "Empty Bottle",
+      "jp": "空き瓶",
+      "category": "other",
+      "icon": "bottle",
+      "count": 396,
+      "min": 200,
+      "note": "ポーション用"
+    },
+    {
+      "name": "Blank Scroll",
+      "jp": "白紙の巻物",
+      "category": "other",
+      "icon": "scroll",
+      "count": 40,
+      "min": 500,
+      "note": "写本用"
+    }
   ]
 }
