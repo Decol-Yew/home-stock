@@ -10,7 +10,7 @@
       "jp": "黒真珠",
       "category": "reagent",
       "icon": "pearl",
-      "count": 998,
+      "count": 1080,
       "min": 1500,
       "note": ""
     },
@@ -19,7 +19,7 @@
       "jp": "血苔",
       "category": "reagent",
       "icon": "moss",
-      "count": 1284,
+      "count": 1331,
       "min": 1500,
       "note": ""
     },
@@ -28,7 +28,7 @@
       "jp": "にんにく",
       "category": "reagent",
       "icon": "garlic",
-      "count": 1475,
+      "count": 1485,
       "min": 1250,
       "note": ""
     },
@@ -37,7 +37,7 @@
       "jp": "朝鮮人参",
       "category": "reagent",
       "icon": "ginseng",
-      "count": 1112,
+      "count": 1212,
       "min": 1250,
       "note": ""
     },
@@ -46,7 +46,7 @@
       "jp": "マンドレイクの根",
       "category": "reagent",
       "icon": "mandrake",
-      "count": 1182,
+      "count": 1237,
       "min": 1500,
       "note": ""
     },
@@ -55,7 +55,7 @@
       "jp": "ナイトシェード",
       "category": "reagent",
       "icon": "nightshade",
-      "count": 1410,
+      "count": 1429,
       "min": 1000,
       "note": ""
     },
@@ -73,7 +73,7 @@
       "jp": "硫黄灰",
       "category": "reagent",
       "icon": "ash",
-      "count": 1383,
+      "count": 1424,
       "min": 1500,
       "note": ""
     },
@@ -83,7 +83,7 @@
       "category": "other",
       "icon": "arrow",
       "tint": "#d7715f",
-      "count": 288,
+      "count": 358,
       "min": 1000,
       "note": "弓用"
     },
@@ -93,7 +93,7 @@
       "category": "other",
       "icon": "bolt",
       "tint": "#6ea8ff",
-      "count": 400,
+      "count": 152,
       "min": 200,
       "note": "クロスボウ用"
     },
@@ -102,7 +102,7 @@
       "jp": "空き瓶",
       "category": "other",
       "icon": "bottle",
-      "count": 396,
+      "count": 418,
       "min": 200,
       "note": "ポーション用"
     },
@@ -111,7 +111,7 @@
       "jp": "白紙の巻物",
       "category": "other",
       "icon": "scroll",
-      "count": 40,
+      "count": 99,
       "min": 500,
       "note": "写本用"
     }
